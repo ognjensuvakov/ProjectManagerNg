@@ -1,0 +1,6 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-5"><projects-component-selector (selectedChange)="projectSelected($event)"></projects-component-selector></div>
+        <div class="col-md-7"><tasks-component-selector [projectId]="selectedProjectId"></tasks-component-selector></div>
+    </div>
+</div>

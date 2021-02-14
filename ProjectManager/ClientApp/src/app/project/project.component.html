@@ -1,0 +1,48 @@
+<h1 id="tableLabel">Projects</h1>
+<h5>Create and select project to add tasks</h5>
+<div class="row">
+    <div class="table-responsive">
+        <table class='table table-striped' *ngIf="projects">
+            <thead>
+                <tr>
+                    <th>Project ID</th>
+                    <th>Project Name</th>
+                    <th>Date Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr [class.selected-project]="project.projectId === selected" (click)="select(project.projectId)" *ngFor="let project of projects">
+                    <td>{{ project.projectId }}</td>
+                    <td>{{ project.projectName }}</td>
+                    <td>{{ project.dateCreated }}</td>
+                    <td><button (click)="edit(project)"> Edit </button></td>
+                    <td><button (click)="delete(project.projectId)"> Delete </button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <form [formGroup]="projectForm" (ngSubmit)="this[eventValue]()">
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <td>Project Name</td>
+                    <td>
+                        <input type="hidden" formControlName="projectId">
+                        <input type="text" formControlName="projectName">
+                        <div *ngIf="submitted && projectForm.controls.projectName.errors" class="text-danger">
+                            <div *ngIf="projectForm.controls.projectName.errors.required">Name is required</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td colspan="2">
+                        <button type="submit" class="btn btn-primary">{{eventValueTitle}}</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
